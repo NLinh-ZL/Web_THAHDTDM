@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <style>
+            @import url('https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@400;500;600;700&display=swap');
+
+            :root {
+                --color-body: #b6cbce;
+                --color-heading: #eef3db;
+                --color-base: #272535;
+                --color-base2: #423f5f;
+                --color-brand: rgb(245, 210, 147);
+                --color-brand2: whitesmoke;
+                --sidbar-width: 240px;
+                --font-base: "Bai Jamjuree";
+            }
+
+            body {
+                background-color: var(--color-base2);
+                color: var(--color-body);
+                font-family: var(--font-base), sans-serif;
+            }
+
+            h1,h2,h3,h4,h5,h6 {
+                color: var(--color-heading);
+                font-weight: 700;
+            }
+
+            a {
+                text-decoration: none;
+                color: var(--color-body);
+                transition: all 0.4s ease;
+            }
+
+            a:hover {
+                color: var(--color-brand);
+            }
+
+            img {
+                width: 100%;
+            }
+
+            .text-brand {
+                color: var(--color-brand);
+            }
+
+            .bg-base {
+                background-color: var(--color-base);
+            }
+
+            .full-height {
+                min-height: 100vh;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                padding-top: 80px;
+                padding-bottom: 80px;
+                border-bottom: 2px solid rgba(255,255,255, 0.1);
+            }
+
+            .shadow-effect {
+                transition: all 0.5s;
+            }
+
+            .shadow-effect:hover {
+                box-shadow: -6px 6px 0 0 var(--color-brand);
+            }
+
+            .iconbox {
+                width: 60px;
+                height: 60px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 32px;
+                background-color: var(--color-brand);
+                color: var(--color-base);
+            }
+
+
+            .navbar {
+                background-color: var(--color-base);
+            }
+
+            .navbar .nav-link {
+                font-weight: 700;
+                text-transform: uppercase;
+                color: #fff;
+            }
+
+            .navbar .nav-link:hover {
+                color: var(--color-brand);
+            }
+
+            .navbar .nav-link.active {
+                color: var(--color-brand);
+            }
+
+            @media (min-width: 992px) {
+                .navbar {
+                    min-height: 100vh;
+                    width: var(--sidbar-width);
+                    background: linear-gradient(rgba(39, 37, 53,0.8), rgba(39, 37, 53,0.8)), url(../images/sidebar-img.jpg);
+                    background-size: cover;
+                    background-position: center;
+                }
+
+                .navbar-brand img {
+                    border: 8px solid var(--color-brand);
+                }
+
+            
+                #content-wrapper {
+                    padding-left: var(--sidbar-width);
+                }
+            }
+
+          
+            .btn {
+                padding: 12px 28px;
+                font-weight: 700;
+            }
+
+            .btn-brand {
+                background-color: var(--color-brand);
+                border-color: var(--color-brand);
+                color: var(--color-base);
+            }
+
+            .btn-brand:hover,
+            .btn-brand:focus {
+                background-color: var(--color-brand2);
+                color: var(--color-base);
+                border-color: var(--color-brand2);
+            }
+
+            .link-custom {
+                font-weight: 700;
+                position: relative;
+            }
+
+            .link-custom::after {
+                content: "";
+                width: 0%;
+                height: 2px;
+                background-color: var(--color-brand);
+                position: absolute;
+                left: 0;
+                top: 110%;
+                transition: all 0.4s;
+            }
+
+            .link-custom:hover::after {
+                width: 100%;
+            }
+
+         
+            .card-custom .card-custom-image {
+                overflow: hidden;
+            }
+
+            .card-custom .card-custom-image img {
+                transition: all 0.4s ease;
+            }
+
+            .card-custom:hover .card-custom-image img {
+                transform: scale(1.1);
+            }
+
+            #contact .form-control {
+                background-color: var(--color-base);
+                border-color: var(--color-base);
+                color: var(--color-body);
+            }
+
+            #contact .form-control:focus {
+                border-color: var(--color-brand);
+                box-shadow: none;
+            }
+
+            #contact .form-control::placeholder {
+                color: var(--color-body);
+            }
+
+            #contact input.form-control {
+                height: 44px;
+            }
+
+          
+
+            .social-icons a {
+                width: 40px;
+                height: 40px;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                background-color: var(--color-base);
+                border-radius: 100px;
+                font-size: 24px;
+            }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container flex-lg-column">
+            <a class="navbar-brand mx-lg-auto mb-lg-4" href="#">
+                <span class="h3 fw-bold d-block d-lg-none">Thiên Đạo</span>
+                <img src="87754c348a3754690d26.jpg" class="d-none d-lg-block rounded-circle" alt="">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto flex-lg-column text-lg-center">
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#Trangchu"><span>Trang chủ</span></a>
+                      </li>
+        
+                      <li class="nav-item">
+                        <a class="nav-link" href="#Thongtin"><span>Thông tin</span></a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#Lienhe"><span>Liên hệ<span></a>
+                      </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <div id="content-wrapper">
+
+        <section id="Trangchu" class="full-height px-lg-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-10">
+                        <h1 class="display-4 fw-bold" data-aos="fade-up">Tôi là <span class="text-brand">Sinh Viên Công Nghệ Thông Tin</span> đến từ HUFI</h1>
+                        <p class="lead mt-2 mb-4" data-aos="fade-up" data-aos-delay="300">Nguyễn Y Thiên Đạo đã có 2 năm học tập tại Trường Đại Học Công Nghiệp Thực Phẩm</p>
+                        <div data-aos="fade-up" data-aos-delay="600">
+                            <a href="index.html" class="btn btn-brand me-3">Dự án của tôi</a>
+                            <a href="#" class="link-custom">Call: 123456789</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="Thongtin" class="full-height px-lg-5">
+            <div class="container">
+
+                <div class="row pb-4" data-aos="fade-up">
+                    <div class="col-lg-8">
+                        <h6 class="text-brand">Thông tin</h6>
+                        <h1>Tổng quan về bản thân và dự án</h1>
+                    </div>
+                </div>
+
+                <div class="row gy-5">
+                    <div class="col-lg-6">
+
+                        <h3 class="mb-4" data-aos="fade-up" data-aos-delay="300">Bản thân</h3>
+                        <div class="row gy-4">
+
+                            <div class="col-12" data-aos="fade-up" data-aos-delay="600">
+                                <div class="bg-base p-4 rounded-4 shadow-effect">
+                                    <h4>Học sinh cấp 2</h4>
+                                    <p class="text-brand mb-2">Trung học cơ sở Đoàn Thị Điểm (2011 - 2016)</p>
+                                    <p class="mb-0">Đạt nhiều thành tích tốt trong học tập, bé giỏi bé ngoan</p>
+                                </div>
+                            </div>
+
+                            <div class="col-12" data-aos="fade-up" data-aos-delay="600">
+                                <div class="bg-base p-4 rounded-4 shadow-effect">
+                                    <h4>Học sinh cấp 3</h4>
+                                    <p class="text-brand mb-2">Trung học phổ thông Marie Curie (2017 - 2020)</p>
+                                    <p class="mb-0">Đạt nhiều thành tích tốt trong học tập</p>
+                                </div>
+                            </div>
+
+                            <div class="col-12" data-aos="fade-up" data-aos-delay="600">
+                                <div class="bg-base p-4 rounded-4 shadow-effect">
+                                    <h4>Sinh viên</h4>
+                                    <p class="text-brand mb-2">Đại Học Công Nghiệp Thực Phẩm TP.HCM (2021 - 2023)</p>
+                                    <p class="mb-0">Theo đuổi ngành công nghệ thông tin, yêu thích khoa học dữ liệu</p>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-6">
+
+                        <h3 class="mb-4" data-aos="fade-up" data-aos-delay="300">Dự án</h3>
+                        <div class="row gy-4">
+
+                            <div class="col-12" data-aos="fade-up" data-aos-delay="600">
+                                <div class="bg-base p-4 rounded-4 shadow-effect">
+                                    <h4>Thiết kế web</h4>
+                                    <p class="text-brand mb-2">Shop bán coffee</p>
+                                    <p class="mb-0">Được làm trong vòng 1 tuần, tham khảo nhiều thông tin kiến thức trên internet.</p>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <section id="Lienhe" class="full-height px-lg-5">
+            <div class="container">
+
+                <div class="row justify-content-center text-center">
+                    <div class="col-lg-8 pb-4" data-aos="fade-up">
+                        <h6 class="text-brand">Liên hệ</h6>
+                        <h1>Hãy để lại lời nhắn cho tôi!
+                        </h1>
+                    </div>
+
+                    <div class="col-lg-8" data-aos="fade-up" data-aos-delay="300">
+                        <form action="#" class="row g-lg-3 gy-3">
+                            <div class="form-group col-md-6">
+                                <input type="text" class="form-control" placeholder="Họ và tên">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <input type="email" class="form-control" placeholder="Địa chỉ email">
+                            </div>
+                            <div class="form-group col-12">
+                                <textarea name="" rows="4" class="form-control" placeholder="Enter your message"></textarea>
+                            </div>
+                            <div class="form-group col-12 d-grid">
+                                <button type="submit" class="btn btn-brand">Bình Luận</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>

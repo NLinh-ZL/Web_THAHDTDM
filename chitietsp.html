@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dahmucsanpham</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap');
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            outline: none;
+            font-family: "Roboto", sans-serif;
+        }
+        
+        body{
+            width: 100%;    
+            height: auto;       
+            color: black; 
+        }
+        
+        p{
+            font-size: 14px;    
+        }
+        .label-cart{
+            position: fixed;
+            top: 17px;
+            right: 10px;
+            z-index: 4;
+            cursor: pointer;
+        }
+
+        .logo{
+            position: fixed;
+            background-color: rgb(15, 13, 20);
+            color: white;
+            width: 100%;
+            text-align: center;
+            padding: 15px 420px 15px 60px;
+            top:0;
+            z-index: 2;
+        }
+
+        .sidebar{
+            position: fixed;
+            top:0;
+            left:0;
+            width: 50px;
+            height: 100%;
+            background-color: rgb(208, 216, 216);
+            z-index: 1;
+            padding-top: 70px;
+        }
+        .sidebar-menu{
+            width: 100%;
+            text-align: center;
+            padding: 10px 5px;
+            color: black;
+            
+        }
+
+        .sidebar-menu > a{
+            text-decoration: none;
+            font-size: 0.7rem;
+            line-height: 1.5;
+            color: black;
+        }
+
+        .sidebar-menu:hover{
+            border-right: 2px solid wheat;
+            color: wheat;
+        }
+        .sidebar-menu >a:hover{
+            color: wheat;
+        }
+
+        .dashboard{
+            height: 100%;
+            width: 100%;
+            padding-right: 360px;
+            padding-left: 60px;
+        }
+
+        .dashboard-banner{
+            width: 100%;
+            height: 300px;
+            position: relative;
+            margin-top: 4rem;
+            padding: 1rem;
+            border-radius: 30px;
+            cursor: pointer;
+        }
+        .dashboard-banner img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 30px;
+            
+        }
+        .banner-promo{  
+            width: auto;
+            position: absolute;
+            color: rgb(122, 115, 115);
+            top:38%;
+            left:40%;
+            margin: auto;
+            font-weight: 800;
+            font-size: 1.3rem;
+            text-align: center;
+            justify-items: center;
+            
+        }
+        .banner-promo > h1 > span{
+            color: wheat;
+        } 
+        .dashboard-title{
+            padding: 0 1rem;
+        }
+
+        .dashboard-menu{
+            display: flex;
+            gap: 10px;
+            padding: 0.3rem 1rem;
+            overflow: auto;
+        }
+
+        .dashboard-menu > a{
+            text-decoration: none;
+            text-align: center;
+            border-radius:20px;
+            min-width: 120px;
+            padding: 0.5rem 0;
+            font-size: 0.9rem;
+            color: black;
+            background: rgba(202, 201, 201, 0.562);
+        }
+
+        .dashboard-menu > a:hover{
+            background-color: rgb(248, 210, 138);
+            color: rgb(255, 255, 255);
+        }
+
+        .dashboard-content{
+            display: grid;
+            grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+            gap: 10px;
+            padding: 0.5rem  1rem 1rem 1rem;
+
+        }
+        .dashboard-cart{
+            background-color: white;
+            box-shadow: rgba(0, 0, 0, 0.384) 0px 1px 4px;
+            border-radius: 15px;
+            position: relative;
+            cursor: pointer;
+
+        }
+
+        .dashboard-cart:hover{
+            box-shadow: rgba(0, 0, 0, 0.37) 0px 5px 15px;
+        }
+
+        .card-image{
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 15px;
+        }
+        
+        .card-detail{
+            padding: 10px;
+        }
+
+        .card-detail >h4 >span{
+            float: right;
+        }
+        .card-time{
+            color: darkgrey;
+            font-size: 0.8rem;
+            padding-top: 10px;
+        }
+
+        .dashboard-order{
+            width: 340px;
+            min-height: 100%;
+            position: fixed;
+            top:0;
+            right:0;
+            padding: 0.5rem 1.5rem;
+            background-color: rgb(208, 216, 216);
+            z-index: 3;
+        }
+
+        .dashboard-order > h3{
+            padding: 10px 0;
+        }
+
+        .order-address > h4{
+            line-height: 2;
+        }
+
+        .order-time{
+            font-size: 0.8rem;
+            color: rgb(146, 144, 144);
+        }
+
+        .order-wrapper{
+            height: 180px;
+            width: 100%;
+            overflow-y: scroll;
+            margin: 20px 0;
+        }
+
+        .order-wrapper::-webkit-scrollbar{
+            width: 7px;
+        }
+
+        .order-wrapper::-webkit-scrollbar-track{
+            background-color: lightgray;
+            border-radius: 20px;
+        }
+        .order-wrapper::-webkit-scrollbar-thumb{
+            background-color: darkgrey;
+            border-radius: 20px;
+        }
+
+        .order-card{
+            display: grid;
+            grid-template-columns: 0.6fr 1fr 0.5fr;
+            padding: 15px 0;
+            gap:5px;
+            justify-content: space-around;
+            align-items: flex-start;
+        }
+
+        .order-image{
+            width: 70px;
+            height: 70px;
+            object-fit: cover;
+            border-radius: 15px;
+        }
+
+        .order-detail >input{
+            width: 35px;
+            height: 35px;
+            text-align: center;
+            border: 2px solid grey;
+            border-radius: 10px;
+            background-color: transparent;
+            margin-left: 10px;
+        }
+
+        .divider{
+            width: 100%;
+            border: 1px dashed grey;
+        }
+        .order-total > p {
+            padding: 10px 0;
+
+        }
+
+        .order-total > p > span{
+            float: right;
+        }
+
+
+        .order-promo{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: lightgray;
+            border: 2px solid darkgray;
+            border-radius: 10px;
+            height: 45px;
+            padding: 0 5px;
+            margin: 5px 0 10px 0;
+        }
+
+        .input-promo{
+            height: 100%;
+            background-color: transparent;
+            border: none;
+        }
+        .button-promo{
+            float: left;
+            background-color: wheat;
+            border: none;
+            border-radius: 5px;
+            height: 80%;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        .checkout{
+            width: 100%;
+            height: 40px;
+            text-align: center;
+            background-color: wheat;
+            border: none;
+            border-radius: 20px;
+            color: rgb(22, 21, 21);
+            cursor: pointer;
+        }
+
+        .checkout:hover{
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+
+
+        #cart{
+            display: none;
+        }
+
+
+        #cart:checked ~ .label-cart{
+            color: rgb(255, 253, 253);
+        }
+
+        #cart:checked ~ .dashboard{
+            padding-right: 10px;
+        }
+
+        #cart:checked ~ .dashboard-order{
+            display: none;
+        }
+        #cart:checked ~ .logo{
+            padding-right: 0px;
+        }
+
+        @media (max-width:991px)
+        {
+            .dashboard .dashboard-banner .banner-promo{
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+                align-items: center;
+                text-align: center;
+                left: 40%;
+                font-size: 1rem;
+            }
+            .Lienhe .heading{
+                position: sticky;
+                z-index: 2;
+                font-size: 1.5rem;
+            }
+            .container .product-image img {
+              max-width: 100%;
+              height: 100%;
+              max-height: 300px;
+            }
+
+            .container .product-info {
+            flex: 1;
+            margin-left: 20px;
+            font-size: .5rem;
+          }
+          .container .product-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+          }
+          .container .product-price {
+            font-size: 1rem;
+            margin-bottom: 10px;
+          }
+
+          .container .product-description {
+            font-size: .7rem;
+            margin-bottom: 20px;
+        }
+
+        .container .slider-img{
+          width: 60px;
+          height: 60px;
+          object-fit: cover;
+          border: 2px solid #fff;
+          cursor: pointer;
+          opacity: 0.5;
+          transition: opacity 0.3s ease-in-out;
+        }
+        }
+        
+        @media screen and (max-width:680px) {
+            .dashboard{
+                padding-right: 0;
+            }
+            .dashboard .dashboard-banner .banner-promo{
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+                align-items: center;
+                text-align: center;
+                left: 35%;
+                font-size: 1rem;
+            }
+            .dashboard-order{
+                width: 100%;
+            }
+            .Lienhe .heading{
+                position: sticky;
+                z-index: 2;
+                font-size: 1.2rem;
+            }
+
+            .container .product-image img {
+            width: 100%;
+            max-width: 25rem;
+            height: 15rem;
+          }
+
+            .container .product-info {
+            flex: 1;
+            margin-left: 20px;
+            font-size: .5rem;
+          }
+          .container .product-title {
+            font-size: .8rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+          }
+          .container .product-price {
+            font-size: .5rem;
+            margin-bottom: 10px;
+          }
+
+          .container .product-description {
+            font-size: .7rem;
+            margin-bottom: 20px;
+        }
+        }
+        @media (max-width:450px)
+        {
+            
+            .dashboard-content h4{
+                font-size: 14px;
+            }
+            .dashboard-content p{
+                font-size: 10px;
+            }
+            .dashboard-title{
+                font-size: 18px;
+                text-align: center;
+            }
+            .dashboard .dashboard-banner .banner-promo{
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+                align-items: center;
+                text-align: center;
+                top:40%;
+                left:28%;
+                font-size: .6rem;
+            }
+            .Lienhe .heading{
+                position: sticky;
+                z-index: 2;
+                font-size: 1.1rem;
+            }
+            .logo{
+                padding: 15px 5px;
+                width: 100%;
+                margin: auto;
+                margin-bottom: 10px;
+                text-align: center;
+            }
+
+            .container .product-image img {
+            width: 100%;
+            max-width: 35rem;
+            height: 10rem;
+          }
+
+            .container .product-info {
+            flex: 1;
+            margin-left: 20px;
+            font-size: .5rem;
+          }
+
+          .container .product-title {
+            font-size: 1rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+          }
+
+          .product-price {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+          }
+
+          .product-description {
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+
+        .product-button {
+          display: inline-block;
+          padding: 10px 20px;
+          background-color: rgb(0, 0, 0);
+          color: #ffffff;
+          text-decoration: none;
+          border-radius: 4px;
+          font-weight: bold;
+        }
+        .product-button:hover{
+          letter-spacing: .05rem;
+          transition: .2s;
+          color: #000000;
+          background: rgb(248, 212, 144);
+        }
+
+        .container .slider-container .slider-img{
+          width: 60px;
+          height: 60px;
+          object-fit: cover;
+        }
+                
+        }
+
+
+        .search-container {
+        position: relative;
+        }
+
+        .search-input {
+        width: 0;
+        padding: 0;
+        height: 100%;
+        border: none;
+        background-color: transparent;
+        transition: width 0.3s ease-in-out;
+        position: absolute;
+        top: 0;
+        left: 30px;
+        right: 0;
+        opacity: 0;
+        pointer-events: none;
+        border: 1px solid black;
+        background: whitesmoke;
+        }
+
+        .search-container.active .search-input {
+        width: 250px;
+        padding: 5px;
+        height: 30px;
+        opacity: 1;
+        pointer-events: auto;
+        border-radius: 5px;
+        }
+        .label-cart:hover{
+            color: wheat;
+        }
+
+        
+        .container {
+          max-width: 100%;
+          margin: 0 auto;
+          background-color: rgb(235, 234, 234);
+          border-radius: 8px;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+          height: 100%;
+        }
+
+        .product-container {
+          display: flex;
+          align-items: center;
+          padding: 20px;
+          width: 100%;
+          border-bottom: 1px solid #000000;
+        }
+
+        .product-image {
+          flex: 1;
+          text-align: center;
+        }
+
+        .product-image img {
+          width: 100%;
+          max-width: 400px;
+          height: 400px;
+        }
+
+        .product-info {
+          flex: 1;
+          margin-left: 20px;
+        }
+
+        .product-title {
+          font-size: 2.5rem;
+          font-weight: bold;
+          margin-bottom: 10px;
+        }
+
+        .product-price {
+          font-size: 1.5rem;
+          margin-bottom: 10px;
+        }
+
+        .product-description {
+          font-size: 1rem;
+          margin-bottom: 20px;
+        }
+
+        .product-button {
+          display: inline-block;
+          padding: 10px 20px;
+          background-color: rgb(0, 0, 0);
+          color: #ffffff;
+          text-decoration: none;
+          border-radius: 4px;
+          font-weight: bold;
+        }
+        .product-button:hover{
+          letter-spacing: .05rem;
+          transition: .2s;
+          color: #000000;
+          background: rgb(248, 212, 144);
+        }
+        .slider-container {
+          padding: 20px;
+          text-align: center;
+        }
+
+        .slider-img {
+          width: 100px;
+          height: 100px;
+          object-fit: cover;
+          border: 2px solid #050505;
+          cursor: pointer;
+          opacity: 0.5;
+          transition: opacity 0.3s ease-in-out;
+        }
+
+        .slider-img.active {
+          opacity: 1;
+        }
+
+
+    .btn{
+            margin-top: 1rem;
+            display: inline-block;
+            padding: .9rem 3rem;
+            font-size: 1.2rem;
+            color: #fff;
+            background-color: rgb(228, 202, 154);
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .btn:hover{
+            letter-spacing: .1rem;
+            transition: .2s;
+        }
+        .heading{
+            text-align: center;
+            color: #eec75e;
+            text-transform: uppercase;
+            padding-bottom: 3.6rem;
+            font-size: 3rem;
+            
+        }
+        .heading span{
+            color: rgb(14, 14, 14);
+            text-transform: uppercase;
+            transition: 2s;
+
+        }
+        
+        .Lienhe .row{
+            display: flex;
+            align-items: center;
+            background-color: rgb(15, 13, 20);
+            flex-wrap: wrap;
+            gap: 1rem;
+            position:sticky ;
+            z-index: 1;
+        }
+
+        .Lienhe .row .map{
+            flex: 1 1 40rem;
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+        }
+        .Lienhe .row .btn{
+            font-size: 1rem;
+            margin: 0;
+            
+        }
+        .Lienhe .row form{
+            flex: 1 1 40rem; 
+            padding: 3rem 1rem;
+            text-align: center;
+        }
+
+
+        .Lienhe .row form h3{
+            text-transform: uppercase;
+            font-size: 3rem;
+            padding: 0;
+            margin: 0;
+            color: #fff;
+        }
+        .Lienhe .row form .inpubox{
+            display: flex;
+            align-items: center;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+            background: rgb(15, 13, 20);
+            border: 1px solid #fff;
+            border-radius: 1rem;
+        }
+
+        .Lienhe .row form .inpubox span{
+            color: #fff;
+            font-size: 2rem;
+            padding-left: 2rem;
+        
+        }
+
+        .Lienhe .row form .inpubox input{
+            width: 100%;
+            padding: 1rem;
+            color: #fff;
+            text-transform: none;
+            background: none;
+            outline: none;
+            border: none;
+        }
+
+
+        .footer{
+            background:rgb(15, 13, 20);
+            text-align: center;
+            position:sticky;
+            z-index: 2;
+            width: 100%;
+        }
+
+        .footer .share{
+            padding: 1rem 0;
+        }
+
+        .footer .share a{
+            height: 4rem;
+            width: 4rem;
+            line-height: 4rem;
+            font-size: 2rem;
+            border: 1px solid #ffffffab;
+            color: #fff;
+            text-decoration: none;
+            margin: .3rem;
+            border-radius: 100%;
+        }
+       
+        .footer .share a:hover{
+            background-color: rgb(223, 194, 142);
+            
+        }
+
+        .footer .links{
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .footer .links a{
+            padding: .7rem 2rem;
+            color:#fff;
+            border: 1px solid rgb(46, 46, 46);
+            text-decoration: none;
+        }
+        .footer .links a:hover{
+         background-color: rgb(238, 207, 150);   
+        
+        }
+
+        .footer .creadit{
+            font-size: 2rem;
+            color:#fff;
+            font-weight: lighter;
+            padding:1.5rem;
+
+        }
+
+        .footer .creadit span{
+            color: rgb(248, 203, 121);
+        }
+    </style>
+
+
+</head>
+<body>
+        <input type="checkbox" id="cart">
+        <label for="cart" class="label-cart"><span class="fas fa fa-shopping-cart"></span></label>
+        
+        <h3 class="logo">Sản phẩm của chúng tôi</h3>
+
+        <div class="sidebar">
+            <div class="sidebar-menu">
+                <div class="search-container">
+                <div class="fas fa-search" id="search-btn"></div>
+                <input type="text" class="search-input" placeholder="Tìm kiếm">
+            </div>
+                <a href="#">Search</a>
+            </div>
+
+            <div class="sidebar-menu">
+                <a href="index.html"><span class="fas fa-home" style="font-size: .9rem;"></span></a>
+                <a href="index.html">Home</a>
+            </div>
+
+            <div class="sidebar-menu">
+                <span class="fas fa-user"></span>
+                <a href="#">User</a>
+            </div>
+        </div>
+
+        <div class="dashboard">
+            <div class="dashboard-banner">
+                <img src="dash.jpg">
+                <div class="banner-promo">
+                    <h1><span>50% Sale Off</span></h1>
+                    <p>Cafe thơm ngon tròn vị</p>
+                </div>
+            </div>
+            <br>
+            <a href="sanpham.html" style="text-decoration: none; color: black;"><h3> <i class="fa-sharp fa-solid fa-arrow-left"></i> Chi tiết sản phẩm</h3></a>
+            <br>
+            <div class="dashboard-content">
+                <div class="dashboard-cart">
+                  <div class="container">
+                    <div class="product-container">
+                      <div class="product-image">
+                        <img id="product-img" src="R (1).jpg" alt="Product Image">
+                      </div>
+                      <div class="product-info">
+                        <h1 class="product-title">Cà phê đậm đặc</h1>
+                        <p class="product-price">$10.99</p>
+                        <p class="product-description">Mô tả sản phẩm: Cà phê đậm đà, xay từ các hạt chất lượng nhất.</p>
+                        <a href="#" class="product-button">Thêm vào giỏ hàng</a>
+                      </div>
+                    </div>
+                    <div class="slider-container">
+                      <img class="slider-img active" src="R.jpg" alt="Product Image">
+                      <img class="slider-img" src="R (2).jpg" alt="Alternate Image 1">
+                      <img class="slider-img" src="front-view-cup-cappuccino-with-cookies-book-table.jpg" alt="Alternate Image 2">
+                    </div>
+                  </div>
+                    </div>
+                </div>
+
+            </div>
+
+            
+        </div>
+
+
+        <div class="dashboard-order">
+            <h3 > Đặt Hàng</h3>
+            <div class="order-address">
+                <p>Địa chỉ</p>
+                <h4>221 hufi lê trọng tấn</h4>
+            </div>
+
+            <div class="order-time">
+                <span class="fas fa-clock"></span> 30mins <span class="fas fa-map-marker-alt"></span> 2 km
+            </div>
+
+            <div class="order-wrapper">
+                <div class="order-card">
+                    <img class="order-image" src="front-view-cup-cappuccino-with-cookies-book-table.jpg">
+                    <div class="order-detail">
+                        <p>Capuchino</p>
+                        <i class="fas fa-times"></i> <input type="text" value="1">
+                    </div>
+                    <h4 class="order-price">$15</h4>
+                </div>
+    
+                <div class="order-card">
+                    <img class="order-image" src="R (1).jpg">
+                    <div class="order-detail">
+                        <p>cafe sữa</p>
+                        <i class="fas fa-times"></i> <input type="text" value="2">
+                    </div>
+                    <h4 class="order-price">$20</h4>
+                </div>
+    
+                <div class="order-card">
+                    <img class="order-image" src="R (2).jpg">
+                    <div class="order-detail">
+                        <p>cafe chồn</p>
+                        <i class="fas fa-times"></i> <input type="text" value="1">
+                    </div>
+                    <h4 class="order-price">$30</h4>
+                </div>
+            </div>
+
+
+            <hr class="divider">
+            <div class="order-total">
+                <p>subtotal<span>$85</span>
+                <p>tax(10%)<span>$7</span>
+                <p>delivery fee<span>$3</span>
+                <div class="order-promo">
+                    <input class="input-promo" type="text" placeholder="Mã khuyến mãi">
+                    <button class="button-promo">Áp dụng</button>
+                </div>
+                <hr class="divider">
+                <p>Tổng công: <span>$95</span></p>
+            </div>
+            <button class="checkout"> 
+                Thanh toán
+            </button>
+        </div>
+
+        <br>
+        <br>
+        <section class="Lienhe">
+            <div class="heading"> <span>Liên hệ ngay</span> với chúng tôi</div>
+            <div class="row">
+                
+                <iframe class="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.067295510655!2d106.628656!3d10.806157900000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752be27d8b4f4d%3A0x92dcba2950430867!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBDw7RuZyBuZ2hp4buHcCBUaOG7sWMgcGjhuqltIFRQLkhDTQ!5e0!3m2!1svi!2s!4v1683370036932!5m2!1svi!2s"  allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>        
+            <form action="">
+                <h3>Thông tin <span>khách hàng</span></h3>
+                <div class="inpubox">
+                    <span class="fas fa-user"> </span>
+                    <input type="text" placeholder="name">
+                </div>
+                <div class="inpubox">
+                    <span class="fas fa-envelope"> </span>
+                    <input type="email" placeholder="email">
+                </div>
+                <div class="inpubox">
+                    <span class="fas fa-phone"> </span>
+                    <input type="number" placeholder="number">
+                </div>
+                    <input type="submit" value="Liên hệ ngay" class="btn">
+                
+            </form>
+        </div>
+        </section>
+
+        <section class="footer">
+          <br>
+          <br>
+          <div class="share">
+              <a href="#" class="fab fa-facebook-f"></a>
+              <a href="#" class="fab fa-twitter"></a>
+              <a href="#" class="fab fa-instagram"></a>
+              <a href="#" class="fab fa-linkedin"></a>
+              <a href="#" class="fab fa-pinterest"></a>
+          </div>
+  
+  
+  
+          <div class="links">
+              <a href="#Trangchu">Trang chủ</a>
+              <a href="#Thongtin">Thông tin</a>
+              <a href="#Sanpham">Sản phẩm</a>
+              <a href="#Menu">Menu</a>
+              <a href="Gioithieu.html">Giới thiệu</a>
+              <a href="#Lienhe">Liên hệ</a>
+          </div>
+  
+  
+          <div class="creadit">Website được tạo bởi <span>Nguyễn Y Thiên Đạo</span> </div>
+      </section>
+
+        <script>
+            const searchContainer = document.querySelector(".search-container");
+            const searchBtn = document.getElementById("search-btn");
+
+            searchBtn.addEventListener("click", () => {
+            searchContainer.classList.toggle("active");
+            });
+        </script>
+
+
+        <script>
+          const sliderImgs = document.querySelectorAll(".slider-img");
+          const productImg = document.getElementById("product-img");
+
+          // Bắt sự kiện click vào ảnh trong slide bar để thay đổi ảnh sản phẩm
+          sliderImgs.forEach((sliderImg) => {
+            sliderImg.addEventListener("click", () => {
+              sliderImgs.forEach((img) => img.classList.remove("active"));
+              sliderImg.classList.add("active");
+              const newImgSrc = sliderImg.getAttribute("src");
+              productImg.setAttribute("src", newImgSrc);
+            });
+          });
+        </script>
+</body>
+</html>
